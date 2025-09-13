@@ -1,37 +1,58 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
+import * as compression from 'compression';
+import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
 
-  // Enable CORS
+  // Security
+  app.use(helmet());
+  app.use(compression());
+
+  // CORS
   app.enableCors({
-    origin: true, // In production, replace with your frontend URL
+    origin:
+      configService.get<string>('FRONTEND_URL') || 'http://localhost:3001',
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  });
+
+  // Versioning
+  app.enableVersioning({
+    type: VersioningType.URI,
+    defaultVersion: '1',
   });
 
   // Global validation pipe
   app.useGlobalPipes(
     new ValidationPipe({
-      transform: true, // Enable transformation
+      transform: true,
       transformOptions: {
-        enableImplicitConversion: false, // Disable implicit conversion to rely on our explicit transforms
+        enableImplicitConversion: false,
       },
-      whitelist: true, // Remove properties that are not in the DTO
-      forbidNonWhitelisted: false, // Allow non-whitelisted properties (for file uploads)
-      skipMissingProperties: false, // Don't skip validation for missing properties
-      validateCustomDecorators: true, // Validate custom decorators
+      whitelist: true,
+      forbidNonWhitelisted: false,
+      skipMissingProperties: false,
+      validateCustomDecorators: true,
     }),
   );
 
   // Global prefix
   app.setGlobalPrefix('api');
 
-  const port = process.env.PORT || 3000;
+  const port = configService.get<number>('PORT') || 3000;
   await app.listen(port);
 
-  console.log(`Application is running on: http://localhost:${port}/api`);
+  console.log(`
+    🚀 Application is running on: http://localhost:${port}/api
+    📝 Environment: ${configService.get<string>('NODE_ENV')}
+    🔐 JWT expires in: ${configService.get<string>('JWT_EXPIRES_IN')}
+  `);
 }
 
 bootstrap().catch((err) => {

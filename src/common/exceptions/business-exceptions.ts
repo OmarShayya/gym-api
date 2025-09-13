@@ -72,3 +72,19 @@ export class InvalidOperationException extends BusinessException {
     super(message, 'INVALID_OPERATION', HttpStatus.BAD_REQUEST);
   }
 }
+
+export class ConflictException extends BusinessException {
+  constructor(message: string) {
+    super(message, 'CONFLICT', HttpStatus.CONFLICT);
+  }
+}
+
+export class DuplicateResourceException extends BusinessException {
+  constructor(resource: string, field: string, value: string) {
+    super(
+      `${resource} with ${field} '${value}' already exists`,
+      'DUPLICATE_RESOURCE',
+      HttpStatus.CONFLICT,
+    );
+  }
+}
