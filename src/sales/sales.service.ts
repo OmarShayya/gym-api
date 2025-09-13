@@ -10,7 +10,7 @@ import { MembersService } from '../members/members.service';
 import { ProductsService } from '../products/products.service';
 import { CreateSaleDto } from './dto/create-sale.dto';
 import { SaleResponseDto } from './dto/sale-response.dto';
-import { MemberDocument } from '../members/schemas/member.schema';
+import { MemberDocument } from '../members/infrastructure/schemas/member.schema';
 import { SalesReportResponse } from './types/sale.types';
 
 @Injectable()

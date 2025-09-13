@@ -12,7 +12,7 @@ import { MembersService } from '../members/members.service';
 import { DayPassesService } from '../day-passes/day-passes.service';
 import { CheckInDto, CheckOutDto, CheckInMethod } from './dto/check-in.dto';
 import { CheckInResponseDto } from './dto/check-in-response.dto';
-import { MemberDocument } from '../members/schemas/member.schema';
+import { MemberDocument } from '../members/infrastructure/schemas/member.schema';
 
 type CheckInWithMember = Omit<CheckInDocument, 'memberId'> & {
   memberId: MemberDocument;

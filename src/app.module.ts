@@ -9,7 +9,7 @@ import { MembersModule } from './members/members.module';
 import { CheckInsModule } from './check-ins/check-ins.module';
 import { ProductsModule } from './products/products.module';
 import { SalesModule } from './sales/sales.module';
-import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from './auth/infrastructure/guards/jwt-auth.guard';
 import { DayPassesModule } from './day-passes/day-passes.module';
 
 @Module({

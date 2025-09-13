@@ -12,8 +12,8 @@ import { DayPassesService } from './day-passes.service';
 import { CreateDayPassDto } from './dto/create-day-pass.dto';
 import { UpdateDayPassDto } from './dto/update-day-pass.dto';
 import { UseDayPassDto } from './dto/use-day-pass.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { RolesGuard } from '../auth/guards/roles.guard';
+import { JwtAuthGuard } from '../auth/infrastructure/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/infrastructure/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Public } from '../auth/decorators/public.decorator';
 

@@ -22,8 +22,8 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { UpdateStockDto } from './dto/update-stock.dto';
 import { SearchProductsDto } from './dto/search-products.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { RolesGuard } from '../auth/guards/roles.guard';
+import { JwtAuthGuard } from '../auth/infrastructure/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/infrastructure/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 
 @Controller('products')

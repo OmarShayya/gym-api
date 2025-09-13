@@ -1,5 +1,5 @@
 import { Types } from 'mongoose';
-import { MemberDocument } from '../../members/schemas/member.schema';
+import { MemberDocument } from '../../members/infrastructure/schemas/member.schema';
 
 export interface PopulatedCheckIn {
   _id: Types.ObjectId;
